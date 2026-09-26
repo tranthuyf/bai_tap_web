@@ -8,6 +8,7 @@ services:
     volumes:
       - ./nginx/website1:/usr/share/nginx/website1:ro
       - ./nginx/website2:/usr/share/nginx/website2:ro
+      - ./nginx/banhang:/usr/share/nginx/html/banhang:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - nodered
