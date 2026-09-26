@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website 1 - Docker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f2f2f2;
+            text-align: center;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eee;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>WEBSITE 1</h1>
+    <p>Docker Compose + Nginx + Node-RED</p>
+</header>
+
+<div class="container">
+
+    <h2>Website 1 đang hoạt động</h2>
+
+    <p>
+        Website này được chạy bằng Nginx trong Docker.
+    </p>
+
+    <button onclick="callAPI()">
+        Gọi API Node-RED
+    </button>
+
+    <div id="result">
+        Chưa gọi API
+    </div>
+
+</div>
+
+<script>
+async function callAPI() {
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = "Đang gọi API...";
+
+    try {
+
+        const response = await fetch("/api/data");
+
+        const data = await response.json();
+
+        result.innerHTML =
+            "<strong>Phản hồi từ Node-RED:</strong><br>" +
+            "Message: " + data.message + "<br>" +
+            "Value: " + data.value;
+
+    } catch (error) {
+
+        result.innerHTML =
+            "Lỗi kết nối API: " + error;
+
+    }
+}
+</script>
+
+</body>
+</html>
